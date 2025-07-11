@@ -35,11 +35,13 @@ function totalCategoryHours(log, inCategory)
 
 function enjoyFilter(log)
 {
-  const aboveFive = log.filter(entry => entry.enjoyment >= 5);
-  return aboveFive;
+    // store enjoyment >=5 to new array
+    const aboveFive = log.filter(entry => entry.enjoyment >= 5);
+    // output activity names instead of object
+    return aboveFive.map(entry => entry.activity);
 }
 
 console.log("Hours spent on physical: " + totalCategoryHours(myWeek,"physical"));
 console.log("Hours spent on social: " + totalCategoryHours(myWeek,"social"));
 
-console.log("Enjoyment above 5:" + enjoyFilter(myWeek));
+console.log("Enjoyment above 5: " + enjoyFilter(myWeek));
