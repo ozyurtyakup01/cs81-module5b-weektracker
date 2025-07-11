@@ -1,9 +1,9 @@
 const myWeek = [
     {day: "Monday", activity: "walking", category: "physical",hoursSpent: 1,
         enjoyment:5, timeOfDay: "morning"},
-    {day: "Tuesday", activity: "workout", category: "physical",hoursSpent: 2,
+    {day: "Tuesday", activity: "workout", category: "physical",hoursSpent: 4,
         enjoyment:6, timeOfDay: "morning"},
-    {day: "Wednesday", activity: "walking", category: "physical",hoursSpent: 1,
+    {day: "Wednesday", activity: "walking", category: "physical",hoursSpent: 3,
         enjoyment:4, timeOfDay: "morning"},
     {day: "Thursday", activity: "reading", category: "relaxing",hoursSpent: 2,
         enjoyment:7, timeOfDay: "night"},
@@ -30,7 +30,7 @@ function totalCategoryHours(log, inCategory)
     // gather all given category in a new array
     const categoryTime = log.filter(entry => entry.category === inCategory);
     // calculate hours spent using reduce
-    return categoryTime.reduce((sum, act) => sum + act.hoursSpent, 0);
+    return categoryTime.reduce((sum, entry) => sum + entry.hoursSpent, 0);
 }
 
 function enjoyFilter(log)
@@ -41,7 +41,17 @@ function enjoyFilter(log)
     return aboveFive.map(entry => entry.activity);
 }
 
+function filterByCondition(testFn) 
+{
+  return myWeek.filter(testFn);
+}
+
 console.log("Hours spent on physical: " + totalCategoryHours(myWeek,"physical"));
 console.log("Hours spent on social: " + totalCategoryHours(myWeek,"social"));
 
 console.log("Enjoyment above 5: " + enjoyFilter(myWeek));
+
+const condArray = filterByCondition(entry => entry.hoursSpent > 1 
+    && entry.category === "physical");
+
+console.log(condArray);
